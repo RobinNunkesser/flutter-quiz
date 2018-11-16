@@ -1,7 +1,9 @@
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
-import 'package:quiz/platform_button.dart';
-import 'package:quiz/platform_scaffold.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:quiz/statistics_page.dart';
+import 'package:quiz/statistics_singleton.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -53,6 +55,24 @@ class _MyHomePageState extends State<MyHomePage>
 
   @override
   Widget build(BuildContext context) {
+
+    var appBar =  PlatformAppBar(
+        title: Text(widget.title),
+        trailingActions: <Widget>[
+          PlatformIconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => StatisticsPage(title: 'Statistik')),
+              );
+            },
+            iosIcon: Icon(Icons.pie_chart, size: 28.0,),
+            androidIcon: Icon(Icons.pie_chart),
+          ),
+        ],
+      );
+
+
     var questionSection = Expanded(
       child: Container(
         padding: const EdgeInsets.all(16.0),
@@ -80,8 +100,8 @@ class _MyHomePageState extends State<MyHomePage>
     );
 
     return PlatformScaffold(
-      title: widget.title,
-      child: SafeArea(
+      appBar: appBar,
+      body: SafeArea(
         child: Column(
           children: [
             questionSection,
@@ -104,6 +124,11 @@ class _MyHomePageState extends State<MyHomePage>
      }
 
   void _skip() {
+    StatisticsSingleton().skippedQuestions++;
+    _nextQuestion();
+  }
+
+  void _nextQuestion() {
     setState(() {
       _index = ++_index % _questions.length;
     });
@@ -117,12 +142,14 @@ class _MyHomePageState extends State<MyHomePage>
     setState(() {
       _areButtonsDisabled = true;
       if (answer == _questions[_index][1]) {
+        StatisticsSingleton().correctAnswers++;
         _response = "Richtig!";
       } else {
+        StatisticsSingleton().falseAnswers++;
         _response = "Falsch!";
       }
     });
     _controller.forward();
-    _skip();
+    _nextQuestion();
   }
 }

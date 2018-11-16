@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:quiz/platform_widget.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class PlatformApp extends PlatformWidget<CupertinoApp, MaterialApp> {
+class PlatformApp extends PlatformWidgetBase<CupertinoApp, MaterialApp> {
 
   final String title;
   final Widget home;
