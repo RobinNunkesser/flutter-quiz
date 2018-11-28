@@ -1,6 +1,6 @@
 import 'package:flutter/animation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:quiz/statistics_page.dart';
 import 'package:quiz/statistics_singleton.dart';
@@ -21,7 +21,8 @@ class _MyHomePageState extends State<MyHomePage>
 
   var _questions = [
     [
-      'Das Videospiel Donkey Kong sollte ursprünglich Popeye als Hauptfigur haben.',
+      'Das Videospiel Donkey Kong sollte ursprünglich '
+          'Popeye als Hauptfigur haben.',
       true
     ],
     ['Die Farbe Orange wurde nach der Frucht benannt.', true],
@@ -43,46 +44,46 @@ class _MyHomePageState extends State<MyHomePage>
       duration: Duration(milliseconds: 1000),
     );
     animation = Tween(begin: 0.0, end: 1.0).animate(_controller)
-    ..addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        _controller.reset();
-        setState(() {
-          _areButtonsDisabled = false;
-        });
-      }
-    });
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          _controller.reset();
+          setState(() => _areButtonsDisabled = false);
+        }
+      });
   }
 
   @override
   Widget build(BuildContext context) {
-
-    var appBar =  PlatformAppBar(
-        title: Text(widget.title),
-        trailingActions: <Widget>[
-          PlatformIconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => StatisticsPage(title: 'Statistik')),
-              );
-            },
-            iosIcon: Icon(Icons.pie_chart, size: 28.0,),
-            androidIcon: Icon(Icons.pie_chart),
+    var appBar = PlatformAppBar(
+      title: Text(widget.title),
+      trailingActions: <Widget>[
+        PlatformIconButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => StatisticsPage(title: 'Statistik')),
+            );
+          },
+          iosIcon: Icon(
+            Icons.pie_chart,
+            size: 28.0,
           ),
-        ],
-      );
-
+          androidIcon: Icon(Icons.pie_chart),
+        ),
+      ],
+    );
 
     var questionSection = Expanded(
       child: Container(
         padding: const EdgeInsets.all(16.0),
-        child: Text('$_question'),
+        child: Text(_question),
       ),
     );
 
     var responseSection = FadeTransition(
-               opacity: animation,
-               child: Text('$_response'),
+      opacity: animation,
+      child: Text(_response),
     );
 
     var buttonSection = Row(
@@ -118,21 +119,17 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   @override
-     dispose() {
-       _controller.dispose();
-       super.dispose();
-     }
+  dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   void _skip() {
     StatisticsSingleton().skippedQuestions++;
     _nextQuestion();
   }
 
-  void _nextQuestion() {
-    setState(() {
-      _index = ++_index % _questions.length;
-    });
-  }
+  void _nextQuestion() => setState(() => _index = ++_index % _questions.length);
 
   void _evaluateAnswerFalse() => _evaluateAnswer(false);
 
