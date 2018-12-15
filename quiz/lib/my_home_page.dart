@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:quiz/statistics_page.dart';
-import 'package:quiz/statistics_singleton.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -36,6 +35,10 @@ class _MyHomePageState extends State<MyHomePage>
   String get _question => _questions[_index][0];
   var _response = '';
 
+  int correctAnswers = 0;
+  int falseAnswers = 0;
+  int skippedQuestions = 0;
+
   @override
   void initState() {
     super.initState();
@@ -62,7 +65,12 @@ class _MyHomePageState extends State<MyHomePage>
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => StatisticsPage(title: 'Statistik')),
+                  builder: (context) => StatisticsPage(
+                        title: 'Statistik',
+                        correctAnswers: correctAnswers,
+                        falseAnswers: falseAnswers,
+                        skippedQuestions: skippedQuestions,
+                      )),
             );
           },
           iosIcon: Icon(
@@ -125,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   void _skip() {
-    StatisticsSingleton().skippedQuestions++;
+    skippedQuestions++;
     _nextQuestion();
   }
 
@@ -139,10 +147,10 @@ class _MyHomePageState extends State<MyHomePage>
     setState(() {
       _areButtonsDisabled = true;
       if (answer == _questions[_index][1]) {
-        StatisticsSingleton().correctAnswers++;
+        correctAnswers++;
         _response = "Richtig!";
       } else {
-        StatisticsSingleton().falseAnswers++;
+        falseAnswers++;
         _response = "Falsch!";
       }
     });
