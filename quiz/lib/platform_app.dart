@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class PlatformApp extends PlatformWidgetBase<CupertinoApp, MaterialApp> {
@@ -10,7 +10,7 @@ class PlatformApp extends PlatformWidgetBase<CupertinoApp, MaterialApp> {
   PlatformApp({this.title, this.home});
 
   @override
-  MaterialApp createAndroidWidget(BuildContext context) {
+  MaterialApp createMaterialWidget(BuildContext context) {
     return MaterialApp(
       title: title,
       home: home,
@@ -18,7 +18,7 @@ class PlatformApp extends PlatformWidgetBase<CupertinoApp, MaterialApp> {
   }
 
   @override
-  CupertinoApp createIosWidget(BuildContext context) {
+  CupertinoApp createCupertinoWidget(BuildContext context) {
     return CupertinoApp(
       title: title,
       home: home,
