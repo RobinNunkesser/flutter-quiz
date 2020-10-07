@@ -1,6 +1,7 @@
 import 'package:flutter/animation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:platform_theming/platform_theming.dart';
 import 'package:quiz/statistics_page.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -58,6 +59,7 @@ class _MyHomePageState extends State<MyHomePage>
   Widget build(BuildContext context) {
     var appBar = AppBar(
       title: Text(widget.title),
+      elevation: platformAppBarElevation,
       actions: <Widget>[
         IconButton(
           onPressed: () {
