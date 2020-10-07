@@ -43,7 +43,6 @@ class _MyHomePageState extends State<MyHomePage>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      vsync: this,
       duration: Duration(milliseconds: 1000),
     );
     animation = Tween(begin: 0.0, end: 1.0).animate(_controller)
@@ -59,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage>
   Widget build(BuildContext context) {
     var appBar = AppBar(
       title: Text(widget.title),
-      elevation: PlatformTheme().platformAppBarElevation,
+      elevation: PlatformTheme.appBarElevation,
       actions: <Widget>[
         IconButton(
           onPressed: () {

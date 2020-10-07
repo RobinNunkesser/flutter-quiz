@@ -13,5 +13,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-var theme = Theme(data: null, child: null)
