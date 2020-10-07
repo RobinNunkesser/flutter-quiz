@@ -8,8 +8,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Quiz',
-      theme: PlatformTheme(),
+      theme: PlatformTheme().data,
       home: MyHomePage(title: 'Quiz'),
     );
   }
 }
+
+var theme = Theme(data: null, child: null)

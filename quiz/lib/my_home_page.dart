@@ -59,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage>
   Widget build(BuildContext context) {
     var appBar = AppBar(
       title: Text(widget.title),
-      elevation: platformAppBarElevation,
+      elevation: PlatformTheme().platformAppBarElevation,
       actions: <Widget>[
         IconButton(
           onPressed: () {
