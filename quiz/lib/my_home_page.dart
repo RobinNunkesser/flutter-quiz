@@ -1,7 +1,6 @@
 import 'package:flutter/animation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:quiz/statistics_page.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -57,10 +56,10 @@ class _MyHomePageState extends State<MyHomePage>
 
   @override
   Widget build(BuildContext context) {
-    var appBar = PlatformAppBar(
+    var appBar = AppBar(
       title: Text(widget.title),
-      trailingActions: <Widget>[
-        PlatformIconButton(
+      actions: <Widget>[
+        IconButton(
           onPressed: () {
             Navigator.push(
               context,
@@ -73,11 +72,7 @@ class _MyHomePageState extends State<MyHomePage>
                       )),
             );
           },
-          iosIcon: Icon(
-            Icons.pie_chart,
-            size: 28.0,
-          ),
-          androidIcon: Icon(Icons.pie_chart),
+          icon: Icon(Icons.pie_chart),
         ),
       ],
     );
@@ -97,18 +92,18 @@ class _MyHomePageState extends State<MyHomePage>
     var buttonSection = Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        PlatformButton(
+        MaterialButton(
           child: Text('Falsch'),
           onPressed: _areButtonsDisabled ? null : _evaluateAnswerFalse,
         ),
-        PlatformButton(
+        MaterialButton(
           child: Text('Richtig'),
           onPressed: _areButtonsDisabled ? null : _evaluateAnswerTrue,
         ),
       ],
     );
 
-    return PlatformScaffold(
+    return Scaffold(
       appBar: appBar,
       body: SafeArea(
         child: Column(
@@ -116,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage>
             questionSection,
             responseSection,
             buttonSection,
-            PlatformButton(
+            MaterialButton(
               child: Text('Überspringen'),
               onPressed: _areButtonsDisabled ? null : _skip,
             ),

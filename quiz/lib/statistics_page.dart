@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class StatisticsPage extends StatelessWidget {
   StatisticsPage(
@@ -29,11 +28,11 @@ class StatisticsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var appBar = PlatformAppBar(
+    var appBar = AppBar(
       title: Text(title),
     );
 
-    return PlatformScaffold(
+    return Scaffold(
       appBar: appBar,
       body: SafeArea(
         child: Column(
