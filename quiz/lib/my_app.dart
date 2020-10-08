@@ -8,7 +8,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Quiz',
-      theme: PlatformTheme().data,
+      theme: PlatformThemeData.light(),
+      darkTheme: PlatformThemeData.dark(),
       home: MyHomePage(title: 'Quiz'),
     );
   }
