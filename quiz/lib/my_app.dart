@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:platform_theming/platform_theming.dart';
 import 'package:quiz/my_home_page.dart';
 
 class MyApp extends StatelessWidget {
@@ -8,8 +6,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Quiz',
-      theme: PlatformThemeData.light(),
-      darkTheme: PlatformThemeData.dark(),
       home: MyHomePage(title: 'Quiz'),
     );
   }
